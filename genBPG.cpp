@@ -1,3 +1,8 @@
+/*
+This software is released under the MIT License, see LICENSE.txt.
+ */
+
+
 #include<stdlib.h>
 #include<assert.h>
 #include<time.h>
