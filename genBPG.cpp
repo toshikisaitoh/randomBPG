@@ -238,7 +238,7 @@ public:
     std::vector<int> P = seq2perm();
     std::cout << "Permutation: ";
     for(int i=0 ; i<numVertices ; i++){
-      std::cout << P[i] << " ";
+      std::cout << P[i]+1 << " ";
     }
     std::cout << std::endl;
   }
