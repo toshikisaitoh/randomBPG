@@ -2,7 +2,6 @@
 This software is released under the MIT License, see LICENSE.txt.
  */
 
-
 #include<stdlib.h>
 #include<assert.h>
 #include<time.h>
@@ -10,7 +9,6 @@ This software is released under the MIT License, see LICENSE.txt.
 #include<iostream>
 #include<vector>
 #include<deque>
-
 
 class Graph{
 private:
@@ -38,7 +36,6 @@ class Sequence {
 private:
   std::vector<int> Seq;
   int numVertices;
-  
 
   void construct(){
     for(int i=0 ; i < 2*numVertices-1 ; i++) Seq[i] = i;
@@ -54,7 +51,6 @@ private:
       construct();
     }
   }
-
 
   void randSeq(){
     for(int i=2*numVertices-2 ; i > 0 ; i--){
@@ -119,15 +115,20 @@ private:
     return Sj;
   }
 
-  
   std::vector<int> holizontalFlip() const {
+    /*
     std::vector<int> Q = seq2perm();
     std::vector<int> P(numVertices);
     for(int i=0 ; i<numVertices ; i++) P[Q[i]]=i;
     std::vector<int> S = perm2seq(P);
+    */
+    std::vector<int> S(numVertices * 2);
+    for(int i=0 ; i<numVertices ; i++){
+      S[2*i + 1] = Seq[2*i];
+      S[2*i] = Seq[2*i + 1];
+    }
     return S;
   }
-  
 
   std::vector<int> seq2perm() const {
     std::vector<int> Q(numVertices);
@@ -151,10 +152,7 @@ private:
     return Q;
   }
 
-  
   std::vector<int> perm2seq(std::vector<int> P) const {
-    assert (P.size() == numVertices);
-    
     std::vector<int> S(numVertices*2);
     
     for(int i=0 ; i<numVertices ; i++){
@@ -170,7 +168,6 @@ private:
       }
       else S[2*i+1] = 0;
     }
-    
     return S;
   }
 
@@ -182,8 +179,8 @@ private:
     for(int i=0 ; i<numVertices ; i++){
       for(int j=i+1 ; j<numVertices ; j++){
 	if(perm[i] > perm[j]){
-	  adj_list[i].push_back(j+1);
-	  adj_list[j].push_back(i+1);
+	  adj_list[perm[i]].push_back(perm[j]+1);
+	  adj_list[perm[j]].push_back(perm[i]+1);
 	  numEdges++;
 	}
       }
@@ -203,7 +200,6 @@ public:
   void reConstruct(){
     iterativeConstruction();
   }
-
   
   //Check canonical and non-negative
   bool isCanonical() const {
@@ -243,7 +239,6 @@ public:
     std::cout << std::endl;
   }
 
-  
   void print() const {
     for(int i=0 ; i<2*numVertices ; i++){
       if(Seq[i]==1) std::cout << "1";
@@ -254,14 +249,12 @@ public:
 };
 
 
-
-
 int main(int argc, char **argv)
 {
   int n;
   
   if(argc < 2){
-    std::cout << "Please input an integer: ";
+    std::cout << "Please input a positive integer: ";
     std::cin >> n;
   }
   else{
@@ -269,6 +262,7 @@ int main(int argc, char **argv)
   }
   
   Sequence S(n);
+  S.print();
   S.printPerm();
   S.printGraph();
   
