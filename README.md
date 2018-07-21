@@ -1,6 +1,6 @@
 # Random generation of Bipartite Permutation Graphs
 
-The program is written in C++. You complile the program `genBPG.cpp` and execute it with the number of vertices in the graph. The program generates an bipartite permutation graph uniformly at random and outputs its adjacency list and the permutation diagram of the graph. This algorithm is based on the algorithm in [1].
+The program is written in C++. You complile the program `genBPG.cpp` and execute it with the number of vertices in the graph. The program generates an bipartite permutation graph uniformly at random and outputs its adjacency list and the permutation diagram of the graph. The implementation is based on the algorithm written in [1].
 
 ## Example how to compile and execute the program
 
